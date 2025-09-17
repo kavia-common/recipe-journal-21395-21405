@@ -8,75 +8,52 @@ This project provides a minimal React template with a clean, modern UI and minim
 - **Modern UI**: Clean, responsive design with KAVIA brand styling
 - **Fast**: Minimal dependencies for quick loading times
 - **Simple**: Easy to understand and modify
+- **Auth Ready**: Supabase Auth integrated (signup, login, session, protected routes)
 
 ## Getting Started
 
-In the project directory, you can run:
+1) Install dependencies
+```bash
+npm install
+```
 
-### `npm start`
+2) Configure environment variables
+- Copy `.env.example` to `.env` in this folder and fill:
+  - `REACT_APP_SUPABASE_URL`
+  - `REACT_APP_SUPABASE_ANON_KEY`
+  - `REACT_APP_SITE_URL` (e.g. http://localhost:3000)
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3) Configure Supabase Auth (Dashboard → Authentication → URL Configuration)
+- Site URL: http://localhost:3000/
+- Add redirect allowlist: http://localhost:3000/**
 
-### `npm test`
+4) Start the app
+```bash
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000)
 
-Launches the test runner in interactive watch mode.
+## Routes
 
-### `npm run build`
+This template uses hash-based routing (no external router dependency):
+- `#/` Home
+- `#/login` Email/password login and magic link
+- `#/signup` Email/password signup
+- `#/auth/callback` Supabase auth callback (email confirmation / magic link)
+- `#/dashboard` Protected route (requires login)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Auth API
+
+Auth context is provided at `src/context/AuthContext.js`:
+- `useAuth()` hook exposes `{ user, session, loading, signUp, signInWithPassword, signOut }`
+
+Supabase is initialized at `src/utils/supabaseClient.js` and uses `REACT_APP_*` env vars.
 
 ## Customization
 
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+- Colors and theme toggling live in `src/App.css`.
+- Components are in `src/components/`.
 
 ## Learn More
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
