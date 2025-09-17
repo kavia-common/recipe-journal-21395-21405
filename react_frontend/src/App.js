@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -7,6 +6,10 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import AuthCallback from './components/AuthCallback';
 import Dashboard from './components/Dashboard';
+import Navbar from './components/Navbar';
+import QuoteHeader from './components/QuoteHeader';
+import Discover from './components/Discover';
+import MyRecipes from './components/MyRecipes';
 
 // Simple hash-based router to avoid adding dependencies.
 const useHashRoute = () => {
@@ -37,42 +40,21 @@ function App() {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
-  const Nav = () => (
-    <nav className="navbar w-full flex justify-center gap-6 mt-4">
-      <a className="App-link font-semibold" href="#/">Home</a>
-      {!user && <a className="App-link font-semibold" href="#/login">Login</a>}
-      {!user && <a className="App-link font-semibold" href="#/signup">Sign Up</a>}
-      <a className="App-link font-semibold" href="#/dashboard">Dashboard</a>
-    </nav>
-  );
-
   const renderRoute = () => {
     switch (route) {
       case '/':
         return (
-          <>
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <p>
-              Current theme: <strong>{theme}</strong>
-            </p>
-            <p className="description">
-              {user ? `Logged in as ${user.email}` : 'You are not logged in.'}
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </>
+          <div className="text-left">
+            <h1 className="text-3xl font-bold mb-2">Welcome{user ? `, ${user.email}` : ''}</h1>
+            <p className="text-gray-600">Discover, save, and manage your favorite recipes.</p>
+            <div className="mt-4 flex gap-3">
+              <a className="btn bg-primary hover:bg-primary-700" href="#/discover">Start Discovering</a>
+              {user ? <a className="btn bg-secondary hover:bg-amber-600" href="#/my-recipes">View My Recipes</a> : null}
+            </div>
+          </div>
         );
       case '/login':
-        return <Login onSuccess={() => window.location.assign('#/dashboard')} />;
+        return <Login onSuccess={() => window.location.assign('#/discover')} />;
       case '/signup':
         return <Signup />;
       case '/auth/callback':
@@ -81,6 +63,14 @@ function App() {
         return (
           <ProtectedRoute fallback={<div style={{ padding: 24 }}>Please <a className="App-link" href="#/login">log in</a> to access the Dashboard.</div>}>
             <Dashboard />
+          </ProtectedRoute>
+        );
+      case '/discover':
+        return <Discover />;
+      case '/my-recipes':
+        return (
+          <ProtectedRoute fallback={<div style={{ padding: 24 }}>Please <a className="App-link" href="#/login">log in</a> to view your recipes.</div>}>
+            <MyRecipes />
           </ProtectedRoute>
         );
       default:
@@ -98,9 +88,11 @@ function App() {
         >
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
-        <div className="container mx-auto px-4 py-10">
-          <div className="mx-auto max-w-3xl text-center space-y-6">
-            <Nav />
+
+        <div className="container mx-auto px-4 py-6">
+          <div className="mx-auto max-w-4xl">
+            <Navbar />
+            <QuoteHeader />
             <div className="card p-6">
               {renderRoute()}
             </div>

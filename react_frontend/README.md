@@ -4,11 +4,11 @@ This project provides a minimal React template with a clean, modern UI and minim
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
 - **Auth Ready**: Supabase Auth integrated (signup, login, session, protected routes)
+- **Discover**: Search recipes via backend MealDB proxy
+- **My Recipes**: Save, view, update (notes/rating), and delete recipes (stored in Supabase)
+- **Quote Header**: Random quote via backend proxy
+- **Ocean Professional** theme with TailwindCSS
 
 ## Getting Started
 
@@ -22,6 +22,7 @@ npm install
   - `REACT_APP_SUPABASE_URL`
   - `REACT_APP_SUPABASE_ANON_KEY`
   - `REACT_APP_SITE_URL` (e.g. http://localhost:3000)
+  - `REACT_APP_BACKEND_BASE_URL` (e.g. http://localhost:8000)
 
 3) Configure Supabase Auth (Dashboard → Authentication → URL Configuration)
 - Site URL: http://localhost:3000/
@@ -35,25 +36,31 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## Routes
 
-This template uses hash-based routing (no external router dependency):
+Hash-based routing (no external router dependency):
 - `#/` Home
+- `#/discover` Discover/search recipes
+- `#/my-recipes` Protected: manage saved recipes
 - `#/login` Email/password login and magic link
 - `#/signup` Email/password signup
-- `#/auth/callback` Supabase auth callback (email confirmation / magic link)
-- `#/dashboard` Protected route (requires login)
+- `#/auth/callback` Supabase auth callback
+- `#/dashboard` Protected sample dashboard
 
-## Auth API
+## Data and APIs
 
-Auth context is provided at `src/context/AuthContext.js`:
-- `useAuth()` hook exposes `{ user, session, loading, signUp, signInWithPassword, signOut }`
-
-Supabase is initialized at `src/utils/supabaseClient.js` and uses `REACT_APP_*` env vars.
+- Supabase table `public.recipes` with RLS (see project assets/supabase.md)
+- Backend proxy endpoints:
+  - GET `/api/quotes/random`
+  - GET `/api/recipes/search?q=...`
+  - GET `/api/recipes/{meal_id}`
+- Frontend reads `REACT_APP_BACKEND_BASE_URL` for proxy base URL.
 
 ## Customization
 
-- Colors and theme toggling live in `src/App.css`.
-- Components are in `src/components/`.
+- Colors/theme in `src/index.css` (CSS variables) + Tailwind utilities.
+- Components in `src/components/`.
+- API helpers in `src/utils/api.js`.
 
 ## Learn More
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React: https://reactjs.org/
+- Supabase: https://supabase.com/docs

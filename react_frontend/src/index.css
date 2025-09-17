@@ -47,6 +47,14 @@ body {
   @apply -translate-y-0.5 shadow;
 }
 
+/* Neutral button variant (used for cancel actions) */
+.btn.bg-gray-200 {
+  @apply text-gray-800;
+}
+.btn.bg-gray-200:hover {
+  @apply bg-gray-300;
+}
+
 .card {
   @apply bg-[var(--bg-secondary)] rounded-xl shadow-soft border border-[var(--border-color)];
 }
