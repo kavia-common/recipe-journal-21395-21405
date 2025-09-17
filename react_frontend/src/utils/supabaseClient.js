@@ -7,6 +7,8 @@ import { createClient } from '@supabase/supabase-js';
  * Required env variables:
  * - REACT_APP_SUPABASE_URL
  * - REACT_APP_SUPABASE_ANON_KEY
+ *
+ * Security note: Do NOT use or expose the Service Role Key in the browser.
  */
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
@@ -19,4 +21,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 // PUBLIC_INTERFACE
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
+export const supabase = createClient(
+  supabaseUrl || '',
+  supabaseAnonKey || ''
+);
