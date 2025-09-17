@@ -38,11 +38,11 @@ function App() {
   };
 
   const Nav = () => (
-    <nav className="navbar" style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: 16, marginTop: 16 }}>
-      <a className="App-link" href="#/">Home</a>
-      {!user && <a className="App-link" href="#/login">Login</a>}
-      {!user && <a className="App-link" href="#/signup">Sign Up</a>}
-      <a className="App-link" href="#/dashboard">Dashboard</a>
+    <nav className="navbar w-full flex justify-center gap-6 mt-4">
+      <a className="App-link font-semibold" href="#/">Home</a>
+      {!user && <a className="App-link font-semibold" href="#/login">Login</a>}
+      {!user && <a className="App-link font-semibold" href="#/signup">Sign Up</a>}
+      <a className="App-link font-semibold" href="#/dashboard">Dashboard</a>
     </nav>
   );
 
@@ -90,7 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header min-h-screen bg-ocean-gradient bg-[length:100%_100%]">
         <button
           className="theme-toggle"
           onClick={toggleTheme}
@@ -98,8 +98,14 @@ function App() {
         >
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
-        <Nav />
-        {renderRoute()}
+        <div className="container mx-auto px-4 py-10">
+          <div className="mx-auto max-w-3xl text-center space-y-6">
+            <Nav />
+            <div className="card p-6">
+              {renderRoute()}
+            </div>
+          </div>
+        </div>
       </header>
     </div>
   );

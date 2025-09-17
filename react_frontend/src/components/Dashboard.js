@@ -9,10 +9,10 @@ export default function Dashboard() {
   const { user, signOut } = useAuth();
 
   return (
-    <div className="container" style={{ padding: 24 }}>
-      <h2 className="title">Dashboard</h2>
-      <p className="description">You are logged in as: {user?.email}</p>
-      <button className="theme-toggle" style={{ position: 'static' }} onClick={() => signOut()}>
+    <div className="container p-6 text-left">
+      <h2 className="text-2xl font-bold text-text mb-2">Dashboard</h2>
+      <p className="text-gray-600 mb-4">You are logged in as: {user?.email}</p>
+      <button className="btn" style={{ position: 'static' }} onClick={() => signOut()}>
         Sign out
       </button>
     </div>

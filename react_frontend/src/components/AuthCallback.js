@@ -35,10 +35,10 @@ export default function AuthCallback() {
   }, []);
 
   return (
-    <div className="container" style={{ padding: 24 }}>
-      <h2 className="title">Auth Callback</h2>
-      <p className="description">{status}</p>
-      <a href="#/" className="App-link">Return to Home</a>
+    <div className="container p-6">
+      <h2 className="text-2xl font-bold text-text mb-2">Auth Callback</h2>
+      <p className="text-gray-600 mb-3">{status}</p>
+      <a href="#/" className="App-link font-semibold">Return to Home</a>
     </div>
   );
 }

@@ -46,42 +46,42 @@ export default function Login({ onSuccess }) {
   };
 
   return (
-    <div className="container" style={{ padding: 24, maxWidth: 480, margin: '0 auto' }}>
-      <h2 className="title">Login</h2>
-      <form onSubmit={handlePasswordLogin} style={{ display: 'grid', gap: 12 }}>
-        <label className="description" htmlFor="email">Email</label>
+    <div className="container max-w-md mx-auto p-6">
+      <h2 className="text-2xl font-bold text-text mb-4">Login</h2>
+      <form onSubmit={handlePasswordLogin} className="grid gap-3">
+        <label className="text-sm text-gray-600" htmlFor="email">Email</label>
         <input
           id="email"
+          className="input"
           type="email"
           required
           value={email}
           onChange={e => setEmail(e.target.value)}
-          style={{ padding: 10, borderRadius: 8, border: '1px solid var(--border-color)' }}
         />
 
-        <label className="description" htmlFor="password">Password</label>
+        <label className="text-sm text-gray-600" htmlFor="password">Password</label>
         <input
           id="password"
+          className="input"
           type="password"
           required
           value={password}
           onChange={e => setPassword(e.target.value)}
-          style={{ padding: 10, borderRadius: 8, border: '1px solid var(--border-color)' }}
         />
 
-        <button type="submit" className="theme-toggle" style={{ position: 'static' }}>
+        <button type="submit" className="btn">
           Sign In
         </button>
 
-        <button onClick={handleMagicLink} className="theme-toggle" style={{ position: 'static', backgroundColor: '#2563EB' }}>
+        <button onClick={handleMagicLink} type="button" className="btn bg-primary hover:bg-primary-700">
           Send Magic Link
         </button>
 
-        {status && <div className="description" style={{ color: '#2563EB' }}>{status}</div>}
-        {errorMsg && <div className="description" style={{ color: '#EF4444' }}>{errorMsg}</div>}
+        {status && <div className="text-sm text-primary">{status}</div>}
+        {errorMsg && <div className="text-sm text-error">{errorMsg}</div>}
       </form>
 
-      <p className="description" style={{ marginTop: 16 }}>
+      <p className="text-sm text-gray-600 mt-4">
         Don&apos;t have an account? <a href="#/signup" className="App-link">Sign up</a>
       </p>
     </div>
